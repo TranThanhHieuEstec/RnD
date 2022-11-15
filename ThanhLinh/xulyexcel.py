@@ -1,11 +1,25 @@
 import numpy as np
 from openpyxl import Workbook, load_workbook
 
-wb = load_workbook('ThongKe_ok.xlsx')
+
+wb1 = load_workbook(filename = 'bbb.xlsx')
+# def writedata():
+# global row_value1
+sheet_ranges = wb1['Sheet']
+row = sheet_ranges[1]
+row_value1 = []
+for i in row:
+    row_value1.append(i.value)
+e = row_value1[0:len(row_value1)]
+print(e)
+
+
+#---------------------------------------------------
+wb = load_workbook('aaa.xlsx')
 ws = wb.active
 
 #in ra giá trị trong 1 cột
-ws = wb['XNL']
+ws = wb['Sheet1']
 col = ws['A']
 col_value = []
 for i in col:
@@ -13,8 +27,8 @@ for i in col:
 # print (col_value)
 
 #in ra giá trị trong 1 hàng
-ws = wb['XNL']
-row = ws[2]
+ws = wb['Sheet1']
+row = ws[1]
 row_value = []
 for i in row:
     row_value.append(i.value)
@@ -40,25 +54,23 @@ def check_user_input(input):
         return -1
 
 def nhapten():
-    while True :
+    # while True :
         print("Nhập tên muốn tìm:")
         name = input()
         if (check_user_input(name) ==1 ):
             name = int(name)
         else:
             None
-        # z= str(name)
         # print (type(name))
         index = timdulieu(name, row_value)
                 
         if (index == -1):
             print("Không tìm thấy")
-
         else:
             print("Tìm thấy tại vị trí ", index+1)
             # print(index+1)
-            for colu in ws.iter_rows(min_row=740, max_row = demhang+1, min_col=index+1, max_col=index+1,  values_only=True):
-             print(colu)
+            # global colu
+            for colu in ws.iter_rows(min_row=1, max_row = demhang+1, min_col=index+1, max_col=index+1,  values_only=True):
+                print(colu)
             # break
-
 nhapten()
